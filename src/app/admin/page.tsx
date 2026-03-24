@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Lock,
   Save,
@@ -8,6 +8,9 @@ import {
   AlertCircle,
   ArrowLeft,
   RefreshCw,
+  Upload,
+  ImageIcon,
+  X,
 } from "lucide-react";
 
 interface ImpressumData {
@@ -32,13 +35,191 @@ interface DatenschutzData {
   zusatz: string;
 }
 
+interface ImageSlot {
+  name: string;
+  label: string;
+  description: string;
+  resolution: string;
+  currentPath: string;
+}
+
+const imageSlots: ImageSlot[] = [
+  {
+    name: "hero",
+    label: "Hero-Hintergrundbild",
+    description: "Grosses Bild im Kopfbereich der Startseite",
+    resolution: "1920 x 1080 px (mind. 1200px breit)",
+    currentPath: "/images/hero.jpg",
+  },
+  {
+    name: "haushaltsnahe-dienstleistungen",
+    label: "Haushaltsnahe Dienstleistungen",
+    description: "Bild fuer die Leistung Haushaltsnahe Dienstleistungen",
+    resolution: "800 x 600 px",
+    currentPath: "/images/haushaltsnahe-dienstleistungen.jpg",
+  },
+  {
+    name: "garten-rasen-teichpflege",
+    label: "Garten-, Rasen- & Teichpflege",
+    description: "Bild fuer die Leistung Garten-, Rasen- & Teichpflege",
+    resolution: "800 x 600 px",
+    currentPath: "/images/garten-rasen-teichpflege.jpg",
+  },
+  {
+    name: "hecken-baum-strauchpflege",
+    label: "Hecken-, Baum- & Strauchpflege",
+    description: "Bild fuer die Leistung Hecken-, Baum- & Strauchpflege",
+    resolution: "800 x 600 px",
+    currentPath: "/images/hecken-baum-strauchpflege.jpg",
+  },
+  {
+    name: "zaunaufbau",
+    label: "Zaunaufbau",
+    description: "Bild fuer die Leistung Zaunaufbau",
+    resolution: "800 x 600 px",
+    currentPath: "/images/zaunaufbau.jpg",
+  },
+  {
+    name: "gartenhausaufbau",
+    label: "Gartenhausaufbau",
+    description: "Bild fuer die Leistung Gartenhausaufbau",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gartenhausaufbau.jpg",
+  },
+  {
+    name: "gehweg-hofflaechensaeuberung",
+    label: "Gehweg- & Hofflaechensaeuberung",
+    description: "Bild fuer die Leistung Gehweg- & Hofflaechensaeuberung",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gehweg-hofflaechensaeuberung.jpg",
+  },
+  {
+    name: "versiegelung-sanitaer",
+    label: "Versiegelung im Sanitaerbereich",
+    description: "Bild fuer die Leistung Versiegelung im Sanitaerbereich",
+    resolution: "800 x 600 px",
+    currentPath: "/images/versiegelung-sanitaer.jpg",
+  },
+];
+
+function ImageUploadCard({ slot }: { slot: ImageSlot }) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
+  const [error, setError] = useState("");
+  const [preview, setPreview] = useState<string | null>(null);
+
+  async function handleUpload(file: File) {
+    setUploading(true);
+    setError("");
+    setUploaded(false);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("imageName", slot.name);
+      formData.append("password", sessionStorage.getItem("admin_pw") || "");
+
+      const res = await fetch("/api/upload-image", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        setUploaded(true);
+        setTimeout(() => setUploaded(false), 5000);
+      } else {
+        setError(result.error || "Upload fehlgeschlagen");
+      }
+    } catch {
+      setError("Verbindungsfehler");
+    }
+
+    setUploading(false);
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Nur Bilddateien erlaubt");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => setPreview(reader.result as string);
+    reader.readAsDataURL(file);
+
+    handleUpload(file);
+  }
+
+  return (
+    <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+      <div className="relative h-40 bg-slate-100">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={preview || `${slot.currentPath}?t=${Date.now()}`}
+          alt={slot.label}
+          className="w-full h-full object-cover"
+        />
+        {uploading && (
+          <div className="absolute inset-0 bg-navy-500/70 flex items-center justify-center">
+            <RefreshCw size={24} className="text-white animate-spin" />
+          </div>
+        )}
+        {uploaded && (
+          <div className="absolute inset-0 bg-green-500/70 flex items-center justify-center">
+            <CheckCircle2 size={24} className="text-white" />
+          </div>
+        )}
+      </div>
+      <div className="p-4">
+        <h3 className="font-semibold text-navy-500 text-sm">{slot.label}</h3>
+        <p className="text-xs text-navy-300 mt-0.5">{slot.description}</p>
+        <p className="text-xs text-accent-500 font-medium mt-1">
+          Empfohlen: {slot.resolution}
+        </p>
+
+        {error && (
+          <div className="mt-2 text-xs text-red-600 flex items-center gap-1">
+            <AlertCircle size={12} />
+            {error}
+            <button onClick={() => setError("")} className="ml-auto">
+              <X size={12} />
+            </button>
+          </div>
+        )}
+
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="hidden"
+        />
+        <button
+          onClick={() => fileRef.current?.click()}
+          disabled={uploading}
+          className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-navy-500 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+        >
+          <Upload size={14} />
+          {uploading ? "Wird hochgeladen..." : "Bild aendern"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const [authenticated, setAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
-  const [activeTab, setActiveTab] = useState<"impressum" | "datenschutz">(
-    "impressum"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "impressum" | "datenschutz" | "bilder"
+  >("impressum");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -199,7 +380,7 @@ export default function AdminPage() {
               href="/"
               className="text-sm text-navy-300 hover:text-navy-500 transition-colors"
             >
-              &larr; Zurück zur Website
+              &larr; Zur&uuml;ck zur Website
             </a>
           </p>
         </div>
@@ -214,7 +395,7 @@ export default function AdminPage() {
   }[] = [
     {
       key: "inhaber",
-      label: "Inhaber / Geschäftsführer",
+      label: "Inhaber / Gesch\u00e4ftsf\u00fchrer",
       placeholder: "Max Mustermann",
     },
     {
@@ -224,8 +405,8 @@ export default function AdminPage() {
     },
     {
       key: "strasse",
-      label: "Straße & Hausnummer",
-      placeholder: "Musterstraße 1",
+      label: "Stra\u00dfe & Hausnummer",
+      placeholder: "Musterstra\u00dfe 1",
     },
     { key: "plz", label: "PLZ", placeholder: "48653" },
     { key: "ort", label: "Ort", placeholder: "Coesfeld" },
@@ -247,7 +428,7 @@ export default function AdminPage() {
     },
     {
       key: "zusatz",
-      label: "Zusätzliche Angaben (optional)",
+      label: "Zus\u00e4tzliche Angaben (optional)",
       placeholder: "z.B. Handelsregister, Berufshaftpflicht...",
     },
   ];
@@ -265,7 +446,7 @@ export default function AdminPage() {
     {
       key: "adresse",
       label: "Adresse",
-      placeholder: "Musterstraße 1, 48653 Coesfeld",
+      placeholder: "Musterstra\u00dfe 1, 48653 Coesfeld",
     },
     {
       key: "email",
@@ -280,7 +461,7 @@ export default function AdminPage() {
     },
     {
       key: "zusatz",
-      label: "Zusätzliche Angaben (optional)",
+      label: "Zus\u00e4tzliche Angaben (optional)",
       placeholder: "z.B. Datenschutzbeauftragter...",
     },
   ];
@@ -294,7 +475,7 @@ export default function AdminPage() {
             <a
               href="/"
               className="text-navy-300 hover:text-navy-500 transition-colors"
-              title="Zurück zur Website"
+              title="Zur\u00fcck zur Website"
             >
               <ArrowLeft size={20} />
             </a>
@@ -310,25 +491,27 @@ export default function AdminPage() {
               <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
               Laden
             </button>
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 disabled:opacity-60 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
-            >
-              {saving ? (
-                "Speichert..."
-              ) : saved ? (
-                <>
-                  <CheckCircle2 size={16} />
-                  Gespeichert
-                </>
-              ) : (
-                <>
-                  <Save size={16} />
-                  Speichern
-                </>
-              )}
-            </button>
+            {activeTab !== "bilder" && (
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 disabled:opacity-60 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+              >
+                {saving ? (
+                  "Speichert..."
+                ) : saved ? (
+                  <>
+                    <CheckCircle2 size={16} />
+                    Gespeichert
+                  </>
+                ) : (
+                  <>
+                    <Save size={16} />
+                    Speichern
+                  </>
+                )}
+              </button>
+            )}
             <button
               onClick={handleLogout}
               className="text-sm text-navy-300 hover:text-red-500 transition-colors"
@@ -379,6 +562,17 @@ export default function AdminPage() {
             }`}
           >
             Datenschutz
+          </button>
+          <button
+            onClick={() => setActiveTab("bilder")}
+            className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1.5 ${
+              activeTab === "bilder"
+                ? "bg-white text-navy-500 shadow-sm"
+                : "text-navy-300 hover:text-navy-500"
+            }`}
+          >
+            <ImageIcon size={14} />
+            Bilder
           </button>
         </div>
 
@@ -472,13 +666,44 @@ export default function AdminPage() {
           </div>
         )}
 
+        {/* Bilder Tab */}
+        {activeTab === "bilder" && (
+          <div>
+            <div className="mb-6">
+              <h2 className="text-lg font-bold text-navy-500">
+                Bilder verwalten
+              </h2>
+              <p className="mt-1 text-sm text-navy-300">
+                Klicke auf &quot;Bild aendern&quot;, um ein neues Bild
+                hochzuladen. Das Bild wird automatisch ersetzt und die Seite
+                neu gebaut (max. 5 MB pro Bild).
+              </p>
+            </div>
+
+            {/* Hero Image - Full Width */}
+            <div className="mb-6">
+              <ImageUploadCard slot={imageSlots[0]} />
+            </div>
+
+            {/* Service Images Grid */}
+            <h3 className="text-sm font-semibold text-navy-400 uppercase tracking-wider mb-4">
+              Leistungs-Bilder
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {imageSlots.slice(1).map((slot) => (
+                <ImageUploadCard key={slot.name} slot={slot} />
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Info */}
         <div className="mt-8 bg-accent-50 border border-accent-100 rounded-xl p-5">
           <p className="text-sm text-accent-700 font-medium">
             Hinweis zum Speichern
           </p>
           <p className="mt-1 text-sm text-accent-600">
-            Änderungen werden direkt in GitHub gespeichert und lösen einen
+            Aenderungen werden direkt in GitHub gespeichert und loesen einen
             automatischen Rebuild aus. Die aktualisierte Seite ist in ca. 1-2
             Minuten online.
           </p>
