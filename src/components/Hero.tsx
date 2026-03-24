@@ -11,8 +11,8 @@ export default function Hero() {
     >
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-cover bg-top bg-no-repeat"
-        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+        className="absolute inset-0 bg-cover bg-no-repeat"
+        style={{ backgroundImage: "url('/images/hero.jpg')", backgroundPosition: "center 30%" }}
       />
       <div className="absolute inset-0 bg-navy-700/85" />
 
