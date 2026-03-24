@@ -12,7 +12,12 @@
   }
 
   body {
-    @apply bg-navy-50 text-navy-500 font-sans;
+    @apply text-navy-500 font-sans;
+    background-image: url('/images/krebsback.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   ::selection {
