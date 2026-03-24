@@ -10,6 +10,7 @@ import {
   Footprints,
   Droplets,
 } from "lucide-react";
+import Image from "next/image";
 
 const services = [
   {
@@ -17,42 +18,49 @@ const services = [
     title: "Haushaltsnahe Dienstleistungen",
     description:
       "Ansprechpartner vor Ort für Mieter, Unternehmen und Privatpersonen. Kleinreparaturen und Hauspflege aus einer Hand.",
+    image: "/images/haushaltsnahe-dienstleistungen.jpg",
   },
   {
     icon: TreePine,
     title: "Garten-, Rasen- & Teichpflege",
     description:
       "Ob Vorgarten, Rasenfläche, Blumenbeete oder Ihr geliebter Teich – wir kümmern uns kompetent und fachmännisch um Ihre Grünflächen.",
+    image: "/images/garten-rasen-teichpflege.jpg",
   },
   {
     icon: Scissors,
     title: "Hecken-, Baum- & Strauchpflege",
     description:
       "Regelmäßige Pflege für gesundes Wachstum. Wir schneiden und gestalten Ihre Hecken, Bäume und Sträucher fachgerecht.",
+    image: "/images/hecken-baum-strauchpflege.jpg",
   },
   {
     icon: Fence,
     title: "Zaunaufbau",
     description:
       "Professionelle Gestaltung und Aufbau von Zaunanlagen für Ihr Grundstück und Ihren Garten.",
+    image: "/images/zaunaufbau.jpg",
   },
   {
     icon: Warehouse,
     title: "Gartenhausaufbau",
     description:
       "Schneller, zuverlässiger und preiswerter Aufbau Ihres Gartenhauses – alles aus einer Hand.",
+    image: "/images/gartenhausaufbau.jpg",
   },
   {
     icon: Footprints,
     title: "Gehweg- & Hofflächensäuberung",
     description:
       "Fegen, Müllentfernung und Unkrautbekämpfung. Nach Wunsch im regelmäßigen Turnus.",
+    image: "/images/gehweg-hofflaechensaeuberung.jpg",
   },
   {
     icon: Droplets,
     title: "Versiegelung im Sanitärbereich",
     description:
       "Fachgerechte Versiegelung von Bädern und Fliesen für langanhaltenden Schutz und Sauberkeit.",
+    image: "/images/versiegelung-sanitaer.jpg",
   },
 ];
 
@@ -110,20 +118,32 @@ export default function Services() {
             <motion.div
               key={service.title}
               variants={cardVariants}
-              className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 border border-slate-100"
+              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-slate-100"
             >
-              <div className="w-12 h-12 bg-accent-50 rounded-xl flex items-center justify-center group-hover:bg-accent-500 transition-colors duration-300">
-                <service.icon
-                  size={24}
-                  className="text-accent-500 group-hover:text-white transition-colors duration-300"
+              {/* Service Image */}
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                <div className="absolute bottom-3 left-3 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center">
+                  <service.icon size={20} className="text-accent-500" />
+                </div>
               </div>
-              <h3 className="mt-5 text-lg font-bold text-navy-500">
-                {service.title}
-              </h3>
-              <p className="mt-2 text-navy-300 text-sm leading-relaxed">
-                {service.description}
-              </p>
+
+              {/* Content */}
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-navy-500">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-navy-300 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
             </motion.div>
           ))}
         </motion.div>

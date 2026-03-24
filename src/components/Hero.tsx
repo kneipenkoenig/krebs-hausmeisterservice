@@ -13,19 +13,15 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-navy-500 via-navy-600 to-navy-700 overflow-hidden"
+      className="relative min-h-[90vh] flex items-center overflow-hidden"
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.04]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+      />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-navy-600/80" />
 
       {/* Decorative shapes */}
       <div className="absolute top-20 right-10 w-72 h-72 bg-accent-500/10 rounded-full blur-3xl" />
