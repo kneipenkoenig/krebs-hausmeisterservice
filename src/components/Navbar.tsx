@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Startseite", href: "#hero" },
@@ -35,18 +36,15 @@ export default function Navbar() {
       <nav className="section-container section-padding">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-navy-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">K</span>
-            </div>
-            <div className="hidden sm:block">
-              <p className="font-bold text-navy-500 text-sm leading-tight">
-                Krebs
-              </p>
-              <p className="text-navy-300 text-xs leading-tight">
-                Hausmeisterservice
-              </p>
-            </div>
+          <a href="#hero" className="flex items-center">
+            <Image
+              src="/images/logo.png"
+              alt="Krebs Hausmeisterservice"
+              width={225}
+              height={105}
+              className="h-10 md:h-12 w-auto"
+              priority
+            />
           </a>
 
           {/* Desktop Nav */}
