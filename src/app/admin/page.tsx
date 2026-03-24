@@ -102,6 +102,51 @@ const imageSlots: ImageSlot[] = [
   },
 ];
 
+const gallerySlots: ImageSlot[] = [
+  {
+    name: "gallery/projekt-1",
+    label: "Projekt 1 - Gartenpflege",
+    description: "Projektbild fuer die Galerie",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gallery/projekt-1.jpg",
+  },
+  {
+    name: "gallery/projekt-2",
+    label: "Projekt 2 - Heckenschnitt",
+    description: "Projektbild fuer die Galerie",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gallery/projekt-2.jpg",
+  },
+  {
+    name: "gallery/projekt-3",
+    label: "Projekt 3 - Zaunaufbau",
+    description: "Projektbild fuer die Galerie",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gallery/projekt-3.jpg",
+  },
+  {
+    name: "gallery/projekt-4",
+    label: "Projekt 4 - Hofreinigung",
+    description: "Projektbild fuer die Galerie",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gallery/projekt-4.jpg",
+  },
+  {
+    name: "gallery/projekt-5",
+    label: "Projekt 5 - Gartenhausaufbau",
+    description: "Projektbild fuer die Galerie",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gallery/projekt-5.jpg",
+  },
+  {
+    name: "gallery/projekt-6",
+    label: "Projekt 6 - Versiegelung",
+    description: "Projektbild fuer die Galerie",
+    resolution: "800 x 600 px",
+    currentPath: "/images/gallery/projekt-6.jpg",
+  },
+];
+
 function ImageUploadCard({ slot }: { slot: ImageSlot }) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
@@ -691,6 +736,16 @@ export default function AdminPage() {
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {imageSlots.slice(1).map((slot) => (
+                <ImageUploadCard key={slot.name} slot={slot} />
+              ))}
+            </div>
+
+            {/* Gallery Images Grid */}
+            <h3 className="text-sm font-semibold text-navy-400 uppercase tracking-wider mb-4 mt-8">
+              Projekt-Bilder (Galerie)
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {gallerySlots.map((slot) => (
                 <ImageUploadCard key={slot.name} slot={slot} />
               ))}
             </div>
