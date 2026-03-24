@@ -1,16 +1,44 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Camera } from "lucide-react";
 import Image from "next/image";
 
-const projects = [
-  { image: "/images/gallery/projekt-1.jpg", title: "Gartenpflege", placeholder: true },
-  { image: "/images/gallery/projekt-2.jpg", title: "Heckenschnitt", placeholder: true },
-  { image: "/images/gallery/projekt-3.jpg", title: "Zaunaufbau", placeholder: true },
-  { image: "/images/gallery/projekt-4.jpg", title: "Hofreinigung", placeholder: true },
-  { image: "/images/gallery/projekt-5.jpg", title: "Gartenhausaufbau", placeholder: true },
-  { image: "/images/gallery/projekt-6.jpg", title: "Versiegelung", placeholder: true },
+const allServices = [
+  {
+    title: "Haushaltsnahe Dienstleistungen",
+    description: "Ansprechpartner vor Ort f\u00fcr Mieter, Unternehmen und Privatpersonen. Kleinreparaturen und Hauspflege.",
+    image: "/images/haushaltsnahe-dienstleistungen.jpg",
+  },
+  {
+    title: "Garten-, Rasen- & Teichpflege",
+    description: "Kompetente und fachm\u00e4nnische Pflege f\u00fcr Ihre Gr\u00fcnfl\u00e4chen, Beete und Teiche.",
+    image: "/images/garten-rasen-teichpflege.jpg",
+  },
+  {
+    title: "Hecken-, Baum- & Strauchpflege",
+    description: "Regelm\u00e4\u00dfiger Schnitt und Gestaltung f\u00fcr gesundes Wachstum Ihrer Pflanzen.",
+    image: "/images/hecken-baum-strauchpflege.jpg",
+  },
+  {
+    title: "Zaunaufbau",
+    description: "Professionelle Gestaltung und Aufbau von Zaunanlagen f\u00fcr Ihr Grundst\u00fcck.",
+    image: "/images/zaunaufbau.jpg",
+  },
+  {
+    title: "Gartenhausaufbau",
+    description: "Schneller, zuverl\u00e4ssiger und preiswerter Aufbau Ihres Gartenhauses.",
+    image: "/images/gartenhausaufbau.jpg",
+  },
+  {
+    title: "Gehweg- & Hoffl\u00e4chens\u00e4uberung",
+    description: "Fegen, M\u00fcllentfernung und Unkrautbek\u00e4mpfung im regelm\u00e4\u00dfigen Turnus.",
+    image: "/images/gehweg-hofflaechensaeuberung.jpg",
+  },
+  {
+    title: "Versiegelung im Sanit\u00e4rbereich",
+    description: "Fachgerechte Versiegelung von B\u00e4dern und Fliesen f\u00fcr langanhaltenden Schutz.",
+    image: "/images/versiegelung-sanitaer.jpg",
+  },
 ];
 
 const containerVariants = {
@@ -18,63 +46,60 @@ const containerVariants = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.97 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
+const cardVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
 };
 
 export default function Gallery() {
   return (
-    <section id="projekte" className="py-16 lg:py-20 bg-navy-50">
+    <section id="leistungen" className="py-20 bg-dark-500">
       <div className="section-container section-padding">
-        <motion.div
+        <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
-          className="max-w-xl"
+          className="text-3xl sm:text-4xl font-black text-white text-center"
         >
-          <span className="text-accent-600 text-xs font-semibold uppercase tracking-widest">
-            Projekte
-          </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-navy-500">
-            Einblicke in unsere Arbeit
-          </h2>
-        </motion.div>
+          Alle Leistungen im \u00dcberblick
+        </motion.h2>
 
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="mt-10 grid grid-cols-2 lg:grid-cols-3 gap-3"
+          className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {projects.map((project, index) => (
+          {allServices.map((service) => (
             <motion.div
-              key={index}
-              variants={itemVariants}
-              className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-navy-100/50"
+              key={service.title}
+              variants={cardVariants}
+              className="group bg-white overflow-hidden hover:shadow-xl transition-shadow duration-300"
             >
-              {project.placeholder ? (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-navy-200">
-                  <Camera size={28} strokeWidth={1.5} />
-                  <span className="mt-1.5 text-xs font-medium">{project.title}</span>
-                </div>
-              ) : (
-                <>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <p className="absolute bottom-3 left-3 text-white text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {project.title}
-                  </p>
-                </>
-              )}
+              <div className="relative h-48 overflow-hidden">
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-base font-bold text-dark-500">
+                  {service.title}
+                </h3>
+                <p className="mt-2 text-sm text-dark-200 leading-relaxed">
+                  {service.description}
+                </p>
+                <a
+                  href="#kontakt"
+                  className="inline-block mt-4 text-xs font-bold uppercase tracking-wider text-brand-600 hover:text-brand-700 transition-colors"
+                >
+                  Anfragen &rarr;
+                </a>
+              </div>
             </motion.div>
           ))}
         </motion.div>

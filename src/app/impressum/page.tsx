@@ -8,7 +8,7 @@ export default function ImpressumPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-navy-500">
+      <div className="bg-dark-500">
         <div className="section-container section-padding py-20 pt-28">
           <Link
             href="/"

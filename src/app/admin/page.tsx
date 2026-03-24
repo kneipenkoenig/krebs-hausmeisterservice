@@ -166,7 +166,7 @@ function ImageUploadCard({ slot }: { slot: ImageSlot }) {
           className="w-full h-full object-cover"
         />
         {uploading && (
-          <div className="absolute inset-0 bg-navy-500/70 flex items-center justify-center">
+          <div className="absolute inset-0 bg-dark-500/70 flex items-center justify-center">
             <RefreshCw size={24} className="text-white animate-spin" />
           </div>
         )}
@@ -177,9 +177,9 @@ function ImageUploadCard({ slot }: { slot: ImageSlot }) {
         )}
       </div>
       <div className="p-4">
-        <h3 className="font-semibold text-navy-500 text-sm">{slot.label}</h3>
-        <p className="text-xs text-navy-300 mt-0.5">{slot.description}</p>
-        <p className="text-xs text-accent-500 font-medium mt-1">
+        <h3 className="font-semibold text-dark-500 text-sm">{slot.label}</h3>
+        <p className="text-xs text-dark-300 mt-0.5">{slot.description}</p>
+        <p className="text-xs text-brand-500 font-medium mt-1">
           Empfohlen: {slot.resolution}
         </p>
 
@@ -203,7 +203,7 @@ function ImageUploadCard({ slot }: { slot: ImageSlot }) {
         <button
           onClick={() => fileRef.current?.click()}
           disabled={uploading}
-          className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-navy-500 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+          className="mt-3 w-full inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-dark-500 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
         >
           <Upload size={14} />
           {uploading ? "Wird hochgeladen..." : "Bild aendern"}
@@ -343,13 +343,13 @@ export default function AdminPage() {
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="w-full max-w-sm">
           <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
-            <div className="w-12 h-12 bg-navy-500 rounded-xl flex items-center justify-center mx-auto">
+            <div className="w-12 h-12 bg-dark-500 rounded-xl flex items-center justify-center mx-auto">
               <Lock size={22} className="text-white" />
             </div>
-            <h1 className="mt-4 text-xl font-bold text-navy-500 text-center">
+            <h1 className="mt-4 text-xl font-bold text-dark-500 text-center">
               Admin-Bereich
             </h1>
-            <p className="mt-1 text-sm text-navy-300 text-center">
+            <p className="mt-1 text-sm text-dark-300 text-center">
               Passwort eingeben, um fortzufahren
             </p>
             <form onSubmit={handleLogin} className="mt-6 space-y-4">
@@ -358,7 +358,7 @@ export default function AdminPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Passwort"
-                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500"
+                className="w-full px-4 py-3 rounded-xl border border-slate-200 text-dark-500 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                 autoFocus
               />
               {loginError && (
@@ -369,7 +369,7 @@ export default function AdminPage() {
               )}
               <button
                 type="submit"
-                className="w-full bg-navy-500 hover:bg-navy-600 text-white py-3 rounded-xl font-semibold transition-colors"
+                className="w-full bg-dark-500 hover:bg-dark-600 text-white py-3 rounded-xl font-semibold transition-colors"
               >
                 Anmelden
               </button>
@@ -378,7 +378,7 @@ export default function AdminPage() {
           <p className="mt-4 text-center">
             <a
               href="/"
-              className="text-sm text-navy-300 hover:text-navy-500 transition-colors"
+              className="text-sm text-dark-300 hover:text-dark-500 transition-colors"
             >
               &larr; Zur&uuml;ck zur Website
             </a>
@@ -474,18 +474,18 @@ export default function AdminPage() {
           <div className="flex items-center gap-3">
             <a
               href="/"
-              className="text-navy-300 hover:text-navy-500 transition-colors"
+              className="text-dark-300 hover:text-dark-500 transition-colors"
               title="Zur\u00fcck zur Website"
             >
               <ArrowLeft size={20} />
             </a>
-            <h1 className="font-bold text-navy-500">Admin-Bereich</h1>
+            <h1 className="font-bold text-dark-500">Admin-Bereich</h1>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={loadContent}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 text-navy-300 hover:text-navy-500 text-sm transition-colors"
+              className="inline-flex items-center gap-1.5 text-dark-300 hover:text-dark-500 text-sm transition-colors"
               title="Inhalte neu laden"
             >
               <RefreshCw size={14} className={loading ? "animate-spin" : ""} />
@@ -495,7 +495,7 @@ export default function AdminPage() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="inline-flex items-center gap-2 bg-accent-500 hover:bg-accent-600 disabled:opacity-60 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
+                className="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 disabled:opacity-60 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
               >
                 {saving ? (
                   "Speichert..."
@@ -514,7 +514,7 @@ export default function AdminPage() {
             )}
             <button
               onClick={handleLogout}
-              className="text-sm text-navy-300 hover:text-red-500 transition-colors"
+              className="text-sm text-dark-300 hover:text-red-500 transition-colors"
             >
               Abmelden
             </button>
@@ -547,8 +547,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab("impressum")}
             className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
               activeTab === "impressum"
-                ? "bg-white text-navy-500 shadow-sm"
-                : "text-navy-300 hover:text-navy-500"
+                ? "bg-white text-dark-500 shadow-sm"
+                : "text-dark-300 hover:text-dark-500"
             }`}
           >
             Impressum
@@ -557,8 +557,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab("datenschutz")}
             className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
               activeTab === "datenschutz"
-                ? "bg-white text-navy-500 shadow-sm"
-                : "text-navy-300 hover:text-navy-500"
+                ? "bg-white text-dark-500 shadow-sm"
+                : "text-dark-300 hover:text-dark-500"
             }`}
           >
             Datenschutz
@@ -567,8 +567,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab("bilder")}
             className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-colors inline-flex items-center gap-1.5 ${
               activeTab === "bilder"
-                ? "bg-white text-navy-500 shadow-sm"
-                : "text-navy-300 hover:text-navy-500"
+                ? "bg-white text-dark-500 shadow-sm"
+                : "text-dark-300 hover:text-dark-500"
             }`}
           >
             <ImageIcon size={14} />
@@ -579,13 +579,13 @@ export default function AdminPage() {
         {/* Impressum Form */}
         {activeTab === "impressum" && (
           <div className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8">
-            <h2 className="text-lg font-bold text-navy-500 mb-6">
+            <h2 className="text-lg font-bold text-dark-500 mb-6">
               Impressum bearbeiten
             </h2>
             <div className="space-y-5">
               {impressumFields.map((field) => (
                 <div key={field.key}>
-                  <label className="block text-sm font-medium text-navy-400 mb-1.5">
+                  <label className="block text-sm font-medium text-dark-400 mb-1.5">
                     {field.label}
                   </label>
                   {field.key === "zusatz" ? (
@@ -599,7 +599,7 @@ export default function AdminPage() {
                       }
                       placeholder={field.placeholder}
                       rows={3}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-dark-500 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-none"
                     />
                   ) : (
                     <input
@@ -612,7 +612,7 @@ export default function AdminPage() {
                         }))
                       }
                       placeholder={field.placeholder}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-dark-500 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                     />
                   )}
                 </div>
@@ -624,13 +624,13 @@ export default function AdminPage() {
         {/* Datenschutz Form */}
         {activeTab === "datenschutz" && (
           <div className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8">
-            <h2 className="text-lg font-bold text-navy-500 mb-6">
+            <h2 className="text-lg font-bold text-dark-500 mb-6">
               Datenschutz bearbeiten
             </h2>
             <div className="space-y-5">
               {datenschutzFields.map((field) => (
                 <div key={field.key}>
-                  <label className="block text-sm font-medium text-navy-400 mb-1.5">
+                  <label className="block text-sm font-medium text-dark-400 mb-1.5">
                     {field.label}
                   </label>
                   {field.key === "zusatz" ? (
@@ -644,7 +644,7 @@ export default function AdminPage() {
                       }
                       placeholder={field.placeholder}
                       rows={3}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-dark-500 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-none"
                     />
                   ) : (
                     <input
@@ -657,7 +657,7 @@ export default function AdminPage() {
                         }))
                       }
                       placeholder={field.placeholder}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 text-dark-500 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
                     />
                   )}
                 </div>
@@ -670,10 +670,10 @@ export default function AdminPage() {
         {activeTab === "bilder" && (
           <div>
             <div className="mb-6">
-              <h2 className="text-lg font-bold text-navy-500">
+              <h2 className="text-lg font-bold text-dark-500">
                 Bilder verwalten
               </h2>
-              <p className="mt-1 text-sm text-navy-300">
+              <p className="mt-1 text-sm text-dark-300">
                 Klicke auf &quot;Bild aendern&quot;, um ein neues Bild
                 hochzuladen. Das Bild wird automatisch ersetzt und die Seite
                 neu gebaut (max. 5 MB pro Bild).
@@ -686,7 +686,7 @@ export default function AdminPage() {
             </div>
 
             {/* Service Images Grid */}
-            <h3 className="text-sm font-semibold text-navy-400 uppercase tracking-wider mb-4">
+            <h3 className="text-sm font-semibold text-dark-400 uppercase tracking-wider mb-4">
               Leistungs-Bilder
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -698,11 +698,11 @@ export default function AdminPage() {
         )}
 
         {/* Info */}
-        <div className="mt-8 bg-accent-50 border border-accent-100 rounded-xl p-5">
-          <p className="text-sm text-accent-700 font-medium">
+        <div className="mt-8 bg-brand-50 border border-brand-100 rounded-xl p-5">
+          <p className="text-sm text-brand-700 font-medium">
             Hinweis zum Speichern
           </p>
-          <p className="mt-1 text-sm text-accent-600">
+          <p className="mt-1 text-sm text-brand-600">
             Aenderungen werden direkt in GitHub gespeichert und loesen einen
             automatischen Rebuild aus. Die aktualisierte Seite ist in ca. 1-2
             Minuten online.
