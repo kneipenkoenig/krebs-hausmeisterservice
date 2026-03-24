@@ -26,6 +26,12 @@ npm-debug.log*
 # vercel
 .vercel
 
+# claude code
+.claude/
+
+# vscode workspace
+*.code-workspace
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
