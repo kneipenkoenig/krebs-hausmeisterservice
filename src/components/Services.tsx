@@ -84,7 +84,7 @@ const cardVariants = {
 
 export default function Services() {
   return (
-    <section id="leistungen" className="py-24 lg:py-32 bg-slate-50">
+    <section id="leistungen" className="py-24 lg:py-32 bg-navy-100/50">
       <div className="section-container section-padding">
         {/* Section Header */}
         <motion.div
@@ -118,7 +118,7 @@ export default function Services() {
             <motion.div
               key={service.title}
               variants={cardVariants}
-              className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-slate-100"
+              className="group bg-navy-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-navy-100"
             >
               {/* Service Image */}
               <div className="relative h-48 overflow-hidden">

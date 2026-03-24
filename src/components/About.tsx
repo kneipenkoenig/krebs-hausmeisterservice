@@ -14,7 +14,7 @@ const values = [
 
 export default function About() {
   return (
-    <section id="ueber-uns" className="py-24 lg:py-32 bg-white">
+    <section id="ueber-uns" className="py-24 lg:py-32 bg-navy-50">
       <div className="section-container section-padding">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: Visual */}
@@ -50,7 +50,7 @@ export default function About() {
             </div>
 
             {/* Floating Card */}
-            <div className="absolute -bottom-6 -right-4 sm:-right-6 bg-white rounded-xl shadow-lg p-5 border border-slate-100">
+            <div className="absolute -bottom-6 -right-4 sm:-right-6 bg-navy-50 rounded-xl shadow-lg p-5 border border-navy-100">
               <p className="text-3xl font-extrabold text-navy-500">100%</p>
               <p className="text-sm text-navy-300 mt-0.5">Einsatzbereit</p>
             </div>

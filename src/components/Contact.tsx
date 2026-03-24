@@ -47,7 +47,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="kontakt" className="py-24 lg:py-32 bg-slate-50">
+    <section id="kontakt" className="py-24 lg:py-32 bg-navy-100/50">
       <div className="section-container section-padding">
         {/* Section Header */}
         <motion.div
@@ -92,7 +92,7 @@ export default function Contact() {
                     id="name"
                     name="name"
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
+                    className="w-full px-4 py-3 rounded-xl border border-navy-100 bg-navy-50 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
                     placeholder="Max Mustermann"
                   />
                 </div>
@@ -108,7 +108,7 @@ export default function Contact() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
+                    className="w-full px-4 py-3 rounded-xl border border-navy-100 bg-navy-50 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
                     placeholder="max@beispiel.de"
                   />
                 </div>
@@ -125,7 +125,7 @@ export default function Contact() {
                   type="tel"
                   id="phone"
                   name="phone"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
+                  className="w-full px-4 py-3 rounded-xl border border-navy-100 bg-navy-50 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
                   placeholder="+49 123 456789"
                 />
               </div>
@@ -140,7 +140,7 @@ export default function Contact() {
                 <select
                   id="service"
                   name="service"
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-navy-500 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
+                  className="w-full px-4 py-3 rounded-xl border border-navy-100 bg-navy-50 text-navy-500 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200"
                 >
                   <option value="">Bitte auswählen...</option>
                   <option value="haushalt">
@@ -174,7 +174,7 @@ export default function Contact() {
                   name="message"
                   rows={5}
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200 resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-navy-100 bg-navy-50 text-navy-500 placeholder:text-slate-400 focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-all duration-200 resize-none"
                   placeholder="Beschreiben Sie Ihr Anliegen..."
                 />
               </div>
@@ -210,7 +210,7 @@ export default function Contact() {
             {contactInfo.map((item) => (
               <div
                 key={item.label}
-                className="bg-white rounded-2xl p-6 border border-slate-100"
+                className="bg-navy-50 rounded-2xl p-6 border border-navy-100"
               >
                 <div className="flex items-start gap-4">
                   <div className="w-11 h-11 bg-accent-50 rounded-xl flex items-center justify-center shrink-0">

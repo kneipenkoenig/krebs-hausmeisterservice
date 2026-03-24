@@ -57,7 +57,7 @@ const itemVariants = {
 
 export default function Gallery() {
   return (
-    <section id="projekte" className="py-24 lg:py-32 bg-white">
+    <section id="projekte" className="py-24 lg:py-32 bg-navy-50">
       <div className="section-container section-padding">
         {/* Section Header */}
         <motion.div
