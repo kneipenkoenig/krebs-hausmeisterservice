@@ -35,7 +35,7 @@ export default function Navbar() {
     >
       <nav className="section-container section-padding">
         <div className="flex items-center justify-between h-14">
-          <a href="#hero">
+          <a href="#hero" className="flex items-center gap-2.5">
             <Image
               src="/images/logo.png"
               alt="Krebs Hausmeisterservice"
@@ -44,6 +44,11 @@ export default function Navbar() {
               className="h-8 md:h-9 w-auto"
               priority
             />
+            <div className="hidden sm:block leading-none">
+              <span className="text-sm md:text-base font-extrabold text-navy-500 tracking-tight">KREBS</span>
+              <br />
+              <span className="text-[9px] md:text-[10px] font-semibold text-navy-300 uppercase tracking-widest">Hausmeisterservice</span>
+            </div>
           </a>
 
           <div className="hidden md:flex items-center gap-6">
