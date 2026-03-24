@@ -1,0 +1,22 @@
+{
+  "impressum": {
+    "inhaber": "[Vor- und Nachname]",
+    "firmenname": "Krebs Hausmeisterservice",
+    "strasse": "[Straße und Hausnummer]",
+    "plz": "[PLZ]",
+    "ort": "Coesfeld",
+    "telefon": "+49 176 21305541",
+    "email": "info@krebs-hausmeisterservice.de",
+    "steuernummer": "[Steuernummer eintragen]",
+    "ustIdNr": "",
+    "zusatz": ""
+  },
+  "datenschutz": {
+    "verantwortlicher": "[Vor- und Nachname]",
+    "adresse": "[Straße, PLZ Ort]",
+    "email": "info@krebs-hausmeisterservice.de",
+    "telefon": "+49 176 21305541",
+    "hostingAnbieter": "Cloudflare Pages",
+    "zusatz": ""
+  }
+}
